@@ -1,13 +1,8 @@
 const urlDecode = function(text) {
   text = text.trim();
   obj = {};
-  for (let i = 0; i < text.length; i++){
-    if (text[i] === '='){
-      text.key.push(obj) = text.substring(0, i);
-      text.value.push(obj) = text.substring(i);
-    } 
-  } 
-  return text;
+  
+  return obj;
 };
 
 console.log(urlDecode("duck=rubber"));

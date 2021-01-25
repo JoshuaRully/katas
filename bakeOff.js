@@ -1,30 +1,28 @@
-const chooseRecipe = function(bakeryA, bakeryB, recipes) {
-  const possibleRecipe = [];
-  recipes.map((allRecipes) => {
-      allRecipes.ingredients.map((recipeIngredient) => {
-          bakeryA.map((ingredient) => {
-            if (recipeIngredient === ingredient) {
-                possibleRecipe.push(ingredient);
-            }
-          });
-          bakeryB.map((ingredient) => {
-              if (recipeIngredient === ingredient) {
-                  possibleRecipe.push(ingredient);
-              }
-          });
-      });
-  });
-  const confirmRecipe = (recipes) => {
-      recipes.map((allRecipes) => {
-          let recipeIngredients = allRecipes.ingredients;
-          checker = recipeIngredients.every((v) => possibleRecipe.includes(v));
-          if (checker) {
-              console.log(allRecipes.name);
-          }
-      });
-  };
-  return confirmRecipe(recipes);
-};
+const ingredientCheck = (ingredients, recipes) => {
+  let possibleRecipes = [];
+  for (let i = 0; i < recipes.length; i++) {
+    for (let j = 0; j < ingredients.length; j++) {
+      if (recipes[i].ingredients.includes(ingredients[j])) {
+        possibleRecipes.push(recipes[i]);
+      };
+    }
+  }
+  return possibleRecipes;
+}
+const chooseRecipe = (bakeryA, bakeryB, recipes) => {
+  let bakeryARecipe = ingredientCheck(bakeryA, recipes);
+  let bakeryBRecipe = ingredientCheck(bakeryB, recipes);
+  let matchingRecipes = [];
+  for (let i = 0; i < bakeryARecipe.length; i++) {
+    for (let j = 0; j < bakeryBRecipe.length; j++) {
+      if (bakeryARecipe[i].name === bakeryBRecipe[j].name) {
+        matchingRecipes.push(bakeryARecipe[i]);
+      }
+    }
+  }
+  return matchingRecipes[0].name;
+}
+
 let bakeryA = ['saffron', 'eggs', 'tomato paste', 'coconut', 'custard'];
 let bakeryB = ['milk', 'butter', 'cream cheese'];
 let recipes = [
